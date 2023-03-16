@@ -21,9 +21,6 @@ RUN apt-get install -y libmagickwand-dev --no-install-recommends && rm -rf /var/
 RUN printf "\n" | pecl install imagick
 RUN docker-php-ext-enable imagick
 
-# Virtualhost
-COPY Docker-vhost.conf /etc/apache2/sites-enabled/docker-vhost-wp.conf
-
 # Redémarrage de Apache pour tenir compte des modifications + modules installés
 RUN service apache2 restart
 
