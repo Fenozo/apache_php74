@@ -11,15 +11,23 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # RUN composer --version
 
 # Install MS ODBC Driver for SQL Server
-RUN apt-get update && apt-get install -y gnupg2
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - 
-RUN curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/mssql-relea`enter code here`se.list 
-RUN apt-get update 
-RUN ACCEPT_EULA=Y apt-get -y --no-install-recommends install msodbcsql17 unixodbc-dev 
-RUN pecl install sqlsrv
-RUN pecl install pdo_sqlsrv
-RUN docker-php-ext-install pdo pdo_mysql
-RUN docker-php-ext-enable sqlsrv pdo_sqlsrv pdo pdo_mysql
+RUN apt-get update \
+    && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+    && curl https://packages.microsoft.com/config/debian/9/prod.list \
+        > /etc/apt/sources.list.d/mssql-release.list \
+    && apt-get install -y --no-install-recommends \
+        locales \
+        apt-transport-https \
+    && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
+    && locale-gen \
+    && apt-get update \
+    && apt-get -y --no-install-recommends install \
+        unixodbc-dev \
+        msodbcsql17
+
+RUN docker-php-ext-install mbstring pdo pdo_mysql \
+    && pecl install sqlsrv pdo_sqlsrv xdebug \
+    && docker-php-ext-enable sqlsrv pdo_sqlsrv xdebug
 
 # Paquets nécessaires à l'installation de WordPress/WordPlate + utiles
 RUN apt-get update && apt-get install -y zip unzip vim
