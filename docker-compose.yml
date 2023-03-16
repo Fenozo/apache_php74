@@ -5,13 +5,9 @@ services:
     container_name: projet-php-apache
     ports:
       - "8000:80"
-    environment:
-      - APACHE_DOCUMENT_ROOT=/var/www/html
-      - COMPOSER_ALLOW_SUPERUSER=1
+    build: './build/php'
     volumes:
       - ./app:/var/www/html
-    build: './build/php'
-
   mysql:
     ports:
       - "3307:3306"
