@@ -9,7 +9,7 @@ services:
       - APACHE_DOCUMENT_ROOT=/var/www/html
       - COMPOSER_ALLOW_SUPERUSER=1
     volumes:
-      - ./app:/var/www/html
+      - ./:/var/www/html
     build: './build/php'
 
   mysql:
