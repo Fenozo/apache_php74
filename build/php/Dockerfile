@@ -12,7 +12,6 @@ RUN apt update \
 RUN a2enmod php7.4 
 RUN systemctl restart apache2 
 
-#EXPOSE 80
 
 # 2. Install prerequisites (Ubuntu)
 
@@ -63,6 +62,9 @@ RUN docker-php-ext-enable imagick
 
 # Redémarrage de Apache pour tenir compte des modifications + modules installés
 RUN service apache2 restart
+
+
+EXPOSE 80
 
 # Dossier de travail
 WORKDIR /var/www/html/app
