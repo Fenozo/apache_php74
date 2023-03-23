@@ -64,7 +64,7 @@ RUN docker-php-ext-enable imagick
 RUN service apache2 restart
 
 
-EXPOSE 80
+EXPOSE 9300
 
 # Dossier de travail
 WORKDIR /var/www/html/app

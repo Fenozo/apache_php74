@@ -4,7 +4,7 @@ services:
     image: edyan/php:7.4-sqlsrv
     container_name: projet-php7.4-apache
     ports:
-      - "9300:80"
+      - "9300:9300"
     build: './build/php'
     volumes:
       - ./app:/var/www/html
