@@ -2,7 +2,7 @@ version: "3.9"
 services:
   web:
     image: edyan/php:7.4-sqlsrv
-    container_name: projet-php-apache
+    container_name: projet-php7.4-apache
     ports:
       - "9300:80"
     build: './build/php'
